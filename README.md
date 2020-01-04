@@ -1,2 +1,0 @@
-# pokemonGo
-Created with CodeSandbox
