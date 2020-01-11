@@ -5,10 +5,10 @@ import axios from "axios";
 import SimpleCard from "../components/SimpleCard";
 
 function CatchPokemon() {
-  const [wildPokemon, setWildPokemon] = useState({});
+  console.log("catchPokemon");
+  const [wildPokemon, setWildPokemon] = useState();
   const [catchedList, setCatchedList] = useState([]);
   const [randomID, setRandomID] = useState(Math.floor(Math.random() * 100));
-
   // useEffect(() => {
   //   axios(`https://pokeapi.co/api/v2/pokemon/${randomID}`).then(res => {
   //     console.log(res.data);
@@ -19,10 +19,11 @@ function CatchPokemon() {
 
   const catchPokemon = () => {
     axios(`https://pokeapi.co/api/v2/pokemon/${randomID}`).then(res => {
-      console.log(res.data.sprites.front_default);
+      console.log(res.data.id);
       setWildPokemon({
         name: res.data.name,
-        imageUrl: res.data.sprites.front_default
+        imageUrl: res.data.sprites.front_default,
+        id: res.data.id
       });
       setRandomID(Math.floor(Math.random() * 100));
     });
@@ -30,8 +31,19 @@ function CatchPokemon() {
   };
 
   useEffect(() => {
-    setCatchedList([...catchedList, wildPokemon]);
+    wildPokemon ? setCatchedList([...catchedList, wildPokemon]) : null;
   }, [wildPokemon]);
+
+  const handleDelete = id => {
+    console.log(typeof id + "put in id" + id);
+
+    console.log(
+      catchedList.map(catched =>
+        console.log(typeof catched.id + "list id" + catched.id)
+      )
+    );
+    setCatchedList(catchedList.filter(catched => catched.id !== id));
+  };
 
   return (
     <Grid container spacing={3}>
@@ -71,7 +83,12 @@ function CatchPokemon() {
           {catchedList.map(pokemon =>
             pokemon ? (
               <Grid item xs={3}>
-                <SimpleCard name={pokemon.name} imageUrl={pokemon.imageUrl} />
+                <SimpleCard
+                  name={pokemon.name}
+                  imageUrl={pokemon.imageUrl}
+                  cardID={pokemon.id}
+                  handleDelete={handleDelete}
+                />
               </Grid>
             ) : null
           )}
@@ -81,4 +98,5 @@ function CatchPokemon() {
   );
 }
 
-export default CatchPokemon;
+export default React.memo(CatchPokemon);
+// export default CatchPokemon;

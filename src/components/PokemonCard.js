@@ -32,7 +32,6 @@ export default function PokemonCard({ url, index }) {
   if (!index) {
     const urlsplit = url.split("/");
     index = urlsplit[urlsplit.length - 2];
-    console.log(index);
   }
   useEffect(() => {
     axios(url).then(res => setImageUrl(res.data.sprites.front_default));
@@ -49,7 +48,7 @@ export default function PokemonCard({ url, index }) {
       setDescription(text);
       setDescriptionEN(text_en);
       setName(res.data.name);
-      console.log(res.data.name);
+      // console.log(res.data.name);
     });
   }, [index]);
 
