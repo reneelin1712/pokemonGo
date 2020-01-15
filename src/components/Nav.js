@@ -65,6 +65,16 @@ export default function DenseAppBar() {
               Profile
             </NavLink>
           </Typography>
+
+          <Typography variant="h6" color="inherit">
+            <NavLink
+              to="/search"
+              activeStyle={{ backgroundColor: "white", color: "black" }}
+              className={classes.navItem}
+            >
+              Search
+            </NavLink>
+          </Typography>
         </Toolbar>
       </AppBar>
     </div>

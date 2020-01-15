@@ -17,6 +17,7 @@ const UserProfile = () => {
   return (
     <div>
       <h2>test </h2>
+      {data ? data.profile.map(user => <p>User Name: {user.name}</p>) : null}
     </div>
   );
 };

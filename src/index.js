@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import PokemonList from "./pages/PokemonList";
 import CatchPokemon from "./pages/CatchPokemon";
 import UserProfile from "./pages/UserProfile";
+import SearchPage from "./pages/SearchPage";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Nav from "./components/Nav";
 import {
@@ -43,6 +44,9 @@ function App() {
                 </Route>
                 <Route path="/profile">
                   <UserProfile />
+                </Route>
+                <Route path="/search">
+                  <SearchPage />
                 </Route>
               </Switch>
             </div>
